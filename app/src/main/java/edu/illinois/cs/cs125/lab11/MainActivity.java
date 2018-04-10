@@ -60,18 +60,26 @@ public final class MainActivity extends AppCompatActivity {
      * Make an API call.
      */
     void startAPICall() {
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
-                "", null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(final JSONObject response) {
-                Log.d(TAG, response.toString());
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(final VolleyError error) {
-                Log.w(TAG, error.toString());
-            }
-        });
-        requestQueue.add(jsonObjectRequest);
+        try {
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                    Request.Method.GET,
+                    "",
+                    null,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(final JSONObject response) {
+                            Log.d(TAG, response.toString());
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(final VolleyError error) {
+                            Log.w(TAG, error.toString());
+                        }
+                    });
+            requestQueue.add(jsonObjectRequest);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }
